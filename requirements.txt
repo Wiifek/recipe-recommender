@@ -8,3 +8,4 @@ regex
 requests
 beautifulsoup4
 joblib
+dotenv
