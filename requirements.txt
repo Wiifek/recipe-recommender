@@ -1,7 +1,10 @@
+streamlit
 nltk
 scikit-learn
 pandas
 numpy
+scipy
 regex
 requests
-beautifulsoup
+beautifulsoup4
+joblib
