@@ -24,9 +24,8 @@ class RecipeRecommender:
             self.df = pickle.load(f)
 
         self.df = self.df.reset_index(drop=True).copy()
-        print("Computing cosine similarity matrix...")
+
         self.similarity_matrix = cosine_similarity(self.tfidf_matrix)
-        print("Similarity matrix ready.")
 
     def recommend_by_ingredients(
         self,
@@ -61,12 +60,3 @@ class RecipeRecommender:
         all_ingredients = " ".join(self.df["ingredients_cleaned"].astype(str)).split()
         counter = Counter(all_ingredients)
         return pd.DataFrame(counter.most_common(top_n), columns=["ingredient_cleaned", "count"])
-
-    def get_recipe_by_title(self, title_substring: str) -> pd.DataFrame:
-        """Fuzzy search recipes by title (case-insensitive partial match)."""
-        mask = self.df["title"].str.contains(title_substring, case=False, na=False)
-        return self.df[mask]
-
-    def get_random_recipes(self, n: int = 5) -> pd.DataFrame:
-        """Get random recipes for exploration."""
-        return self.df.sample(n=min(n, len(self.df)), random_state=42)

@@ -1,8 +1,8 @@
 import streamlit as st
 import ast
-from src.loaders import ensure_models_loaded
+from src.loaders import ModelLoader
 
-ensure_models_loaded()
+ModelLoader.ensure_models_loaded()
 recommender = st.session_state.recommender
 
 st.header("Find Recipes by Ingredients")

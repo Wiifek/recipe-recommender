@@ -1,11 +1,11 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-from src.utils.preprocess import clean_ingredients
+from src.utils.preprocess import Preprocessor
 
 calorie_models = st.session_state.calorie_models
 
-st.header("🔮 Predict Calories from Ingredients")
+st.header("Predict Calories from Ingredients")
 
 # User input
 user_input = st.text_area(
@@ -16,7 +16,7 @@ if st.button("Predict Calories"):
     if user_input:
         # Split and clean input
         ingredients_list = [ing.strip() for ing in user_input.replace(",", "\n").split("\n") if ing.strip()]
-        cleaned_ingredients = clean_ingredients(str(ingredients_list))
+        cleaned_ingredients = Preprocessor.clean_ingredients(ingredients_list)
         cleaned_text = " ".join(cleaned_ingredients)
         
         if not cleaned_text:
